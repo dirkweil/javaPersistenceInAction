@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>de.gedoplan</groupId>
+    <artifactId>java-persistence-in-action</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>java-persistence-in-action-v2_1</artifactId>
+
+  <packaging>jar</packaging>
+
+  <properties>
+    <eclipselink.version>2.6.0-SNAPSHOT</eclipselink.version>
+    <h2.version>1.3.171</h2.version>
+
+    <javax.persistence.provider>org.eclipse.persistence.jpa.PersistenceProvider</javax.persistence.provider>
+    <persistentClasses><![CDATA[
+      <jar-file>../classes</jar-file>
+      <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    ]]></persistentClasses>
+
+    <javax.persistence.jdbc.driver>org.h2.Driver</javax.persistence.jdbc.driver>
+    <javax.persistence.jdbc.url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1</javax.persistence.jdbc.url>
+    <javax.persistence.jdbc.user>test</javax.persistence.jdbc.user>
+    <javax.persistence.jdbc.password>test</javax.persistence.jdbc.password>
+  </properties>
+
+  <build>
+    <finalName>${project.artifactId}</finalName>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>${h2.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>eclipselink</artifactId>
+      <version>${eclipselink.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <profiles>
+  
+    <profile>
+      <id>h2-file</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+
+      <properties>
+        <javax.persistence.jdbc.driver>org.h2.Driver</javax.persistence.jdbc.driver>
+        <javax.persistence.jdbc.url>jdbc:h2:~/h2/beantrial;AUTO_SERVER=TRUE</javax.persistence.jdbc.url>
+        <javax.persistence.jdbc.user>sa</javax.persistence.jdbc.user>
+        <javax.persistence.jdbc.password></javax.persistence.jdbc.password>
+      </properties>
+    </profile>
+  
+  </profiles>
+</project>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<h:body>
+  <h:form>
+    <h:panelGrid columns="3">
+      <h:outputLabel value="Name: " for="name" />
+      <h:inputText value="#{personModel.person.name}" id="name" />
+      <h:message for="name" />
+
+      <h:outputLabel value="Vorname: " for="vorname" />
+      <h:inputText value="#{personModel.person.vorname}" id="vorname" />
+      <h:message for="vorname" />
+
+      <h:outputLabel value="Strasse/Nr.: " for="strasse_nr" />
+      <h:panelGroup id="strasse_nr">
+        <h:inputText value="#{personModel.person.adresse.strasse}" id="strasse" />
+        <h:inputText value="#{personModel.person.adresse.hausNummer}" size="5" id="hausNummer" />
+      </h:panelGroup>
+      <h:panelGroup>
+        <h:message for="strasse" />
+        <h:message for="hausNummer" />
+      </h:panelGroup>
+
+      <h:outputLabel value="PLZ/Ort: " for="plz_ort" />
+      <h:panelGroup id="plz_ort">
+        <h:inputText value="#{personModel.person.adresse.plz}" size="5" id="plz" />
+        <h:inputText value="#{personModel.person.adresse.ort}" id="ort" />
+      </h:panelGroup>
+      <h:panelGroup>
+        <h:message for="plz" />
+        <h:message for="ort" />
+      </h:panelGroup>
+      
+      <h:outputLabel value="Telefon:" for="telefonNummern" />
+      <h:inputTextarea value="#{personModel.person.telefonNummernAsString}" id="telefonNummern" />
+      <h:message for="telefonNummern"/>
+      
+      <h:outputLabel value="Mail:" for="mailAdresse" />
+      <h:inputText value="#{personModel.person.mailAdresse}" id="mailAdresse" />
+      <h:message for="mailAdresse"/>
+    </h:panelGrid>
+
+    <h:commandButton value="cancel" action="#{personModel.cancel()}" immediate="true" />
+    <h:commandButton value="next" action="next" />
+    <h:commandButton value="finish" action="#{personModel.save()}" />
+  </h:form>
+
+  <h:messages globalOnly="true" />
+</h:body>
+</html>

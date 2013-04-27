@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+  version="2.0">
+  <persistence-unit name="beantrial">
+    <jta-data-source>jdbc/beantrial</jta-data-source>
+    <shared-cache-mode>NONE</shared-cache-mode>
+    <properties>
+      <!-- Create and modify database tables automatically -->
+      <property name="eclipselink.ddl-generation" value="create-tables" />
+      <!-- Leider erst ab EclipseLink 2.4
+      <property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+       -->
+      <property name="eclipselink.ddl-generation.output-mode" value="database" />
+      <property name="hibernate.hbm2ddl.auto" value="update" />
+      
+      <!-- Log sql commands including parameters -->
+      <property name="eclipselink.logging.level.sql" value="FINE" />
+      <property name="eclipselink.logging.parameters" value="true" />
+      <!-- For Hibernate set the log categories org.hibernate.SQL und org.hibernate.type.descriptor.sql.BasicBinder to TRACE -->
+
+      <!-- Hibernate: Use new id generator -->
+      <property name="hibernate.id.new_generator_mappings" value="true" />
+    </properties>
+  </persistence-unit>
+</persistence>
