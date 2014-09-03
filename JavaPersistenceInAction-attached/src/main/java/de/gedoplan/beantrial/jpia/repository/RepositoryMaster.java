@@ -1,6 +1,5 @@
 package de.gedoplan.beantrial.jpia.repository;
 
-import de.gedoplan.baselibs.enterprise.interceptor.Transactional;
 import de.gedoplan.beantrial.jpia.interceptor.LogEntityManager;
 
 import java.io.Serializable;
@@ -8,12 +7,13 @@ import java.io.Serializable;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 /**
  * Repository-Master.
- * 
+ *
  * Diese Klasse bietet Repository-übergreifende Methoden (derzeit nur {@link #saveAll()}) an.
- * 
+ *
  * @author dw
  */
 @ApplicationScoped
