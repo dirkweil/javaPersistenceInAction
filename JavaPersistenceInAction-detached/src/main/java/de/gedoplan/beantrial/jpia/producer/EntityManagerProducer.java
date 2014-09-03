@@ -7,13 +7,13 @@ import javax.persistence.PersistenceContext;
 
 /**
  * Producer für einen transaktionsgebundenen Entity Manager.
- * 
+ *
  * @author dw
  */
 @ApplicationScoped
 public class EntityManagerProducer
 {
-  @PersistenceContext(unitName = "beantrial")
+  @PersistenceContext(unitName = "conference")
   @Produces
   EntityManager entityManager;
 }

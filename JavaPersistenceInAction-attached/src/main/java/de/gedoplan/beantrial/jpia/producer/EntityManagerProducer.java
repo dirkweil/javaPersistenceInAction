@@ -18,20 +18,20 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * Producer für einen konversationsgebundenen Entity Manager.
- * 
+ *
  * @author dw
  */
 @ApplicationScoped
 public class EntityManagerProducer
 {
-  @PersistenceUnit(unitName = "beantrial")
+  @PersistenceUnit(unitName = "conference")
   private EntityManagerFactory entityManagerFactory;
 
   private static final Log     LOG = LogFactory.getLog(EntityManagerProducer.class);
 
   /**
    * Konversationsgebundenen EntityManager erstellen.
-   * 
+   *
    * @return Entity Manager
    */
   @Produces
@@ -62,7 +62,7 @@ public class EntityManagerProducer
 
   /**
    * Entity Manager nach Gebrauch entsorgen.
-   * 
+   *
    * @param entityManager
    */
   public void disposeEntityManager(@Disposes @Any EntityManager entityManager)

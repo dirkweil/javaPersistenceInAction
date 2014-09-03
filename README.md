@@ -1,4 +1,4 @@
 javaPersistenceInAction
 =======================
 
-Samples for JAX sessions "Java Persistence in Action"
+Samples for conference sessions "Java Persistence in Action"
