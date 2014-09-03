@@ -87,7 +87,7 @@ public class PersonModel implements Serializable
 
     // TALKABOUT D5) Person ist nach diesem Request detached. Deshalb komplett lesen, um alle Bearbeitungsdialoge zu befriedigen
 
-    this.person = this.personRepository.findByIdEager(person.getId());
+    this.person = this.personRepository.findByIdIncludingTelAndHobbies(person.getId());
 
     logPerson("Edit", this.person);
 

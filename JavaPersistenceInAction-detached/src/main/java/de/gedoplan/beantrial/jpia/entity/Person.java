@@ -17,6 +17,8 @@ import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OrderColumn;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -30,12 +32,13 @@ import javax.validation.constraints.NotNull;
 
 /**
  * Entity-Klasse für Personen.
- * 
+ *
  * @author dw
  */
 @Entity(name = "Person")
 @Access(AccessType.FIELD)
 @Table(name = Person.TABLE_NAME)
+@NamedEntityGraph(name = "Person.TelAndHobbies", attributeNodes = { @NamedAttributeNode("telefonNummern"), @NamedAttributeNode("hobbies") })
 public class Person extends GeneratedIntegerIdEntity implements Comparable<Person>
 {
   /**
@@ -86,7 +89,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * BV-Validierungsmethode für {@link #telefonNummern}.
-   * 
+   *
    * @return <code>true</code>, wenn alle Telefonnummern valide sind
    */
   @AssertTrue(message = ValidTelNumber.MESSAGE)
@@ -123,7 +126,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Kostruktor.
-   * 
+   *
    * @param name Name
    * @param vorname Vorname
    */
@@ -140,7 +143,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Wert liefern: {@link #name}.
-   * 
+   *
    * @return Wert
    */
   public String getName()
@@ -150,7 +153,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Wert setzen: {@link #name}.
-   * 
+   *
    * @param name Wert
    */
   public void setName(String name)
@@ -160,7 +163,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Wert liefern: {@link #vorname}.
-   * 
+   *
    * @return Wert
    */
   public String getVorname()
@@ -170,7 +173,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Wert setzen: {@link #vorname}.
-   * 
+   *
    * @param subName Wert
    */
   public void setVorname(String subName)
@@ -180,7 +183,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Wert liefern: {@link #adresse}.
-   * 
+   *
    * @return Wert
    */
   public Adresse getAdresse()
@@ -208,7 +211,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Wert liefern: {@link #telefonNummern}.
-   * 
+   *
    * @return Wert
    */
   public List<String> getTelefonNummern()
@@ -218,7 +221,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Telefonnummern zeilenweise in einem String liefern.
-   * 
+   *
    * @return Telefonnummern, getrennt durch '\n'
    */
   @Transient
@@ -229,7 +232,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Telefonnummern setzen anhand eines Strings, in dem die Nummern zeilenweise enthalten sind.
-   * 
+   *
    * @param s Telefonnummern, getrennt durch '\n'
    */
   public void setTelefonNummernAsString(String s)
@@ -239,7 +242,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Wert liefern: {@link #mailAdresse}.
-   * 
+   *
    * @return Wert
    */
   public String getMailAdresse()
@@ -249,7 +252,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Wert setzen: {@link #mailAdresse}.
-   * 
+   *
    * @param mailAdresse Wert
    */
   public void setMailAdresse(String mailAdresse)
@@ -259,7 +262,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Wert liefern: {@link #hobbies}.
-   * 
+   *
    * @return Wert
    */
   public List<String> getHobbies()
@@ -269,7 +272,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Hobbies zeilenweise in einem String liefern.
-   * 
+   *
    * @return Hobbies, getrennt durch '\n'
    */
   @Transient
@@ -280,7 +283,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * Hobbies setzen anhand eines Strings, in dem die Hobbies zeilenweise enthalten sind.
-   * 
+   *
    * @param s Hobbies, getrennt durch '\n'
    */
   public void setHobbiesAsString(String s)
@@ -290,7 +293,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * @see de.gedoplan.baselibs.persistence.entity.SingleIdEntity#toString()
    */
   @Override
@@ -313,7 +316,7 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * @see java.lang.Comparable#compareTo(java.lang.Object)
    */
   @Override
@@ -326,7 +329,6 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
    * Leeres Adressobjekt vor dem Speichern durch <code>null</code> ersetzen. Hierdurch wird verhindert, dass durch das Late Init
    * in {@link #getAdresse()} bei unverändert leerer Adresse eine Änderung in die DB geschrieben wird.
    */
-  @SuppressWarnings("unused")
   @PrePersist
   @PreUpdate
   private void preSave()
@@ -335,14 +337,5 @@ public class Person extends GeneratedIntegerIdEntity implements Comparable<Perso
     {
       this.adresse = null;
     }
-  }
-
-  /**
-   * Lazy-Attribute komplett laden.
-   */
-  public void loadLazyAttributes()
-  {
-    this.telefonNummern.size();
-    this.hobbies.size();
   }
 }
