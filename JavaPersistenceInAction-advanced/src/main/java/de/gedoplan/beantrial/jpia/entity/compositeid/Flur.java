@@ -16,11 +16,11 @@ import javax.persistence.Transient;
 
 /**
  * Entity-Klasse für Flure (in Gebäuden).
- * 
+ *
  * Diese Klasse verdeutlicht wie {@link Fluegel} den Aufbau einer mehrteiligen ID mit IdClass. Hier sind allerdings zwei Id-Teile
  * Relationen zu anderen Entities, wobei diese Relationen überlappend sind in dem Sinne, dass die dazu gehörenden IDs ein
  * gemeinsames DB-Feld referenzieren.
- * 
+ *
  * @author dw
  */
 @Entity
@@ -59,7 +59,7 @@ public class Flur extends SingleIdEntity<FlurId>
 
   /**
    * Flügel.
-   * 
+   *
    * Diese Relation ist vollständig Teil der ID und daher nur lesend ausgeführt.
    */
   @ManyToOne
@@ -69,7 +69,7 @@ public class Flur extends SingleIdEntity<FlurId>
 
   /**
    * Etage.
-   * 
+   *
    * Diese Relation ist vollständig Teil der ID und daher nur lesend ausgeführt.
    */
   @ManyToOne
@@ -79,7 +79,7 @@ public class Flur extends SingleIdEntity<FlurId>
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * @see de.gedoplan.baselibs.persistence.entity.SingleIdEntity#getId()
    */
   @Override
@@ -94,7 +94,7 @@ public class Flur extends SingleIdEntity<FlurId>
 
   /**
    * Konstruktor.
-   * 
+   *
    * @param gebaeude Gebäude
    * @param fluegelKz Gebäudeflügel-Kennzeichen
    */
@@ -116,7 +116,7 @@ public class Flur extends SingleIdEntity<FlurId>
 
   /**
    * Wert liefern: {@link #gebaeude}.
-   * 
+   *
    * @return Wert
    */
   public Gebaeude getGebaeude()
@@ -126,7 +126,7 @@ public class Flur extends SingleIdEntity<FlurId>
 
   /**
    * Wert liefern: {@link #fluegel}.
-   * 
+   *
    * @return Wert
    */
   public Fluegel getFluegel()
@@ -136,7 +136,7 @@ public class Flur extends SingleIdEntity<FlurId>
 
   /**
    * Wert liefern: {@link #etage}.
-   * 
+   *
    * @return Wert
    */
   public Etage getEtage()

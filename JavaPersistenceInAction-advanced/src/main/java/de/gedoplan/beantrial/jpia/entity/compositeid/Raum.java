@@ -15,11 +15,11 @@ import javax.persistence.Table;
 
 /**
  * Entity-Klasse für Räume.
- * 
+ *
  * Diese Klasse verdeutlicht den Aufbau von Relationen, deren Foreign Keys mit dem Primary Key überlappen - hier in Form der
- * DB-Spalte GEBAUDE_ID, die sowohl Teil des PKs von Raum ist als ach Teil der FKs für die Relationen zu {@link Fluegel} und
+ * DB-Spalte GEBAUDE_ID, die sowohl Teil des PKs von Raum ist als auch Teil der FKs für die Relationen zu {@link Fluegel} und
  * {@link Etage}.
- * 
+ *
  * @author dw
  */
 @Entity
@@ -40,7 +40,7 @@ public class Raum extends SingleIdEntity<RaumId>
 
   /**
    * Gebäude.
-   * 
+   *
    * Dies ist Teil der ID.
    */
   @MapsId("gebaeudeId")
@@ -49,7 +49,7 @@ public class Raum extends SingleIdEntity<RaumId>
 
   /**
    * Flügel.
-   * 
+   *
    * Hierin ist auch das Gebäude enthalten, was bereits ID-Anteil ist. Die JoinColumn ist daher nur lesend eingestellt.
    */
   @ManyToOne
@@ -59,18 +59,17 @@ public class Raum extends SingleIdEntity<RaumId>
 
   /**
    * Flügel-Kennzeichen.
-   * 
+   *
    * Dieses Feld ist Teil des Flügels und nur deshalb explizit notwenig, da einige Provider (u. a. Hibernate) keine Mischung von
    * normalen und nur lesenden JoinColumns erlauben. Andernfalls (bspw. bei EclipseLink) kann dieses Feld entfallen und die
-   * entsprechende JoinColumn mit insertable=true, updatable=true eingesellt werden.
+   * entsprechende JoinColumn mit insertable=true, updatable=true eingestellt werden.
    */
-  @SuppressWarnings("unused")
   @Column(name = "FLUEGEL_KZ")
   private String             fluegelKz;
 
   /**
    * Etage.
-   * 
+   *
    * Hierin ist auch das Gebäude enthalten, was bereits ID-Anteil ist. Die JoinColumn ist daher nur lesend eingestellt.
    */
   @ManyToOne
@@ -80,17 +79,17 @@ public class Raum extends SingleIdEntity<RaumId>
 
   /**
    * Stock der Etage.
-   * 
+   *
    * Dieses Feld ist Teil der Etage und nur deshalb explizit notwenig, da einige Provider (u. a. Hibernate) keine Mischung von
    * normalen und nur lesenden JoinColumns erlauben. Andernfalls (bspw. bei EclipseLink) kann dieses Feld entfallen und die
-   * entsprechende JoinColumn mit insertable=true, updatable=true eingesellt werden.
+   * entsprechende JoinColumn mit insertable=true, updatable=true eingestellt werden.
    */
   @SuppressWarnings("unused")
   private int                stock;
 
   /**
    * {@inheritDoc}
-   * 
+   *
    * @see de.gedoplan.baselibs.persistence.entity.SingleIdEntity#getId()
    */
   @Override
@@ -101,7 +100,7 @@ public class Raum extends SingleIdEntity<RaumId>
 
   /**
    * Konstruktor.
-   * 
+   *
    * @param gebaeude Gebäude
    * @param raumNummer Raumnummer
    */
@@ -113,7 +112,7 @@ public class Raum extends SingleIdEntity<RaumId>
 
   /**
    * Konstruktor.
-   * 
+   *
    * @param gebaeude Gebäude
    * @param raumNummer Raumnummer
    * @param fluegel Flügel
@@ -136,7 +135,7 @@ public class Raum extends SingleIdEntity<RaumId>
 
   /**
    * Wert liefern: {@link #gebaeude}.
-   * 
+   *
    * @return Wert
    */
   public Gebaeude getGebaeude()
@@ -146,7 +145,7 @@ public class Raum extends SingleIdEntity<RaumId>
 
   /**
    * Wert liefern: {@link #fluegel}.
-   * 
+   *
    * @return Wert
    */
   public Fluegel getFluegel()
@@ -156,7 +155,7 @@ public class Raum extends SingleIdEntity<RaumId>
 
   /**
    * Wert setzen: {@link #fluegel}.
-   * 
+   *
    * @param fluegel Wert
    */
   public void setFluegel(Fluegel fluegel)
@@ -176,7 +175,7 @@ public class Raum extends SingleIdEntity<RaumId>
 
   /**
    * Wert liefern: {@link #etage}.
-   * 
+   *
    * @return Wert
    */
   public Etage getEtage()
@@ -186,7 +185,7 @@ public class Raum extends SingleIdEntity<RaumId>
 
   /**
    * Wert setzen: {@link #etage}.
-   * 
+   *
    * @param etage Wert
    */
   public void setEtage(Etage etage)
